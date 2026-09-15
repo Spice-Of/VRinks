@@ -9,10 +9,10 @@ const SITE_CONFIG = {
   eventDateRangeLabel: "2026年11月27日(金)〜11月29日(日)",
 
   // 参加するVRChatグループのページURL
-  groupJoinUrl: "https://vrchat.com/home/group/grp_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  groupJoinUrl: "https://vrc.group/SSC.6137",
 
   // X (Twitter) のプロフィールURL（フッター用）
-  xUrl: "https://twitter.com/",
+  xUrl: "https://x.com/SpiceOfVRinks?s=20",
 
   /* ---------------------------------------------------------
      データソース（Googleスプレッドシート「ウェブに公開」→CSV）
@@ -21,10 +21,10 @@ const SITE_CONFIG = {
      未設定の間はサンプルデータ（下記 FALLBACK_*）が表示されます。
      --------------------------------------------------------- */
   csv: {
-    about:      "", // 概要シートのCSV公開URL（1行だけのシート）
-    schedule:   "", // タイムスケジュールシートのCSV公開URL
-    news:       "", // 最新情報シートのCSV公開URL
-    supporters: "", // 応援団体シートのCSV公開URL
+    about:      "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=0&single=true&output=csv", // 概要シートのCSV公開URL（1行だけのシート）
+    schedule:   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=867582881&single=true&output=csv", // タイムスケジュールシートのCSV公開URL
+    news:       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=2040822935&single=true&output=csv", // 最新情報シートのCSV公開URL
+    supporters: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=359879489&single=true&output=csv", // 応援団体シートのCSV公開URL
   },
 
   /* ---------------------------------------------------------
@@ -61,10 +61,10 @@ const SITE_CONFIG = {
    =========================================================== */
 
 const FALLBACK_ABOUT = {
-  lead: "Spice Of VRinks は、VRChat上でイベントやコミュニティ運営を続ける団体が登壇し、自分たちの活動を自分たちの言葉で紹介するお披露目会です。",
+  lead: "Spice Of VRinks は、VRChat上でイベントやコミュニティ運営を続ける団体が登壇し、自分たちの活動を自分たちの言葉で紹介するイベントです。",
   body: "大きなワールドで開催される華やかなイベントも、少人数でじっくり続く集まりも、どれも誰かが試行錯誤しながら育ててきた\u201cスパイス\u201dです。普段は交わらないコミュニティ同士が同じ舞台に立つことで、参加者にとっては新しい行き先を見つけるきっかけに、団体にとっては互いを知るきっかけになることを目指しています。",
   card1_title: "登壇形式", card1_text: "各会場で持ち時間の中、団体が自身のイベントやコミュニティの魅力を紹介します。詳細は決まり次第お知らせします。",
-  card2_title: "対象",   card2_text: "VRChatのイベントに関わる全ての人。運営側も、参加する側も歓迎です。",
+  card2_title: "対象",   card2_text: "VRChatに関わる全ての人。登壇団体側も、観覧する側も歓迎です。",
   card3_title: "会場",   card3_text: "VRChat内の特設ワールドにて開催。詳細は開催当日までに告知します。",
 };
 
@@ -84,12 +84,12 @@ const FALLBACK_SCHEDULE = [
 ];
 
 const FALLBACK_NEWS = [
-  { date: "2026.09.07", text: "特設サイトを公開しました。", link_url: "", x_post_url: "" },
-  { date: "2026.09.07", text: "開催期間を決定しました。詳細はタイムスケジュールをご確認ください。", link_url: "", x_post_url: "" },
+  { date: "2026.09.15", text: "特設サイトを公開しました。", link_url: "", x_post_url: "" },
+  { date: "2026.09.07", text: "開催期間を掲載しました。詳細はタイムスケジュールをご確認ください。", link_url: "", x_post_url: "" },
 ];
 
 const FALLBACK_SUPPORTERS = [
-  { name: "Supporter A", banner_url: "", link_url: "#" },
-  { name: "Supporter B", banner_url: "", link_url: "#" },
-  { name: "Supporter C", banner_url: "", link_url: "#" },
+  { name: "応援団体募集中", banner_url: "", link_url: "#" },
+  { name: "応援団体募集中", banner_url: "", link_url: "#" },
+  { name: "応援団体募集中", banner_url: "", link_url: "#" },
 ];
