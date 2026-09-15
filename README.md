@@ -8,7 +8,7 @@ VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pages�
 - `styles.css` … デザイン
 - `script.js` … CSV読み込み・描画などの挙動
 - `config.js` … **編集用の設定ファイル**(基本的にはここだけ触れば運用できます)
-- `assets/` … ロゴ・バナーなど画像を置く場合に使用
+- `Pic/` … ロゴ・バナーなど画像を置くフォルダ
 
 ## まず編集するところ(config.js)
 
@@ -47,6 +47,8 @@ VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pages�
 ### supporters シートについて
 
 `banner_url` に横長のバナー画像URLを入れてください。`link_url` を入れると、バナーがそのままリンクになります。
+
+画像を `Pic` フォルダに入れて公開する場合は、`banner_url` に `Pic/ファイル名.png` のような相対パスを入れればOKです(GitHub Pagesなどでこのフォルダ一式をそのまま公開している場合)。外部の画像URLを使う場合はそのままフルURLを入れてください。
 
 ### 登壇団体・MC・コメンテーターについて
 
