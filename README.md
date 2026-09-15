@@ -2,8 +2,6 @@
 
 VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pagesでの公開を想定した静的サイト構成になっています。
 
-https://spice-of.github.io/VRinks/
-
 ## ファイル構成
 
 - `index.html` … ページ本体
@@ -64,4 +62,4 @@ https://spice-of.github.io/VRinks/
 
 ## デザインについて
 
-紙色の背景・藍色のアクセント・和文セリフ(Shippori Mincho)+ゴシック(Noto Sans JP)の組み合わせによるナチュラル/ミニマル路線にしています。端末が強制ダークモードになっている場合は、自動で読みやすい配色に切り替わります。カラーやフォントを変えたい場合は `styles.css` 冒頭の `:root` 内の変数を書き換えるだけで全体に反映されます。
+濃紺(藍色)の会場に金色の装飾をあわせた、レセプション/ガラパーティーのような華やかな路線にしています。見出しは和文セリフ(Shippori Mincho)、本文はゴシック(Noto Sans JP)。サイト全体を常時ダークテーマとして表示するように固定しているので(`color-scheme: dark`)、端末の設定に関わらずこの配色で表示されます。カラーやフォントを変えたい場合は `styles.css` 冒頭の `:root` 内の変数(`--color-bg` や `--color-gold` など)を書き換えるだけで全体に反映されます。

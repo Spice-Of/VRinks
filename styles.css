@@ -1,21 +1,21 @@
 /* =========================================================
    Spice Of VRinks — Stylesheet
-   Design concept: 静かなスパイス見本帳 / botanical field-guide editorial
+   Design concept: 藍色の会場に金の装飾 / gala reception evening
    ========================================================= */
 
 :root {
-  --color-bg:        #F2F1EA;
-  --color-bg-alt:    #E7E5D8;
-  --color-card:      #FBFAF6;
-  --color-ink:       #1B2430;
-  --color-ink-soft:  #444B59;
-  --color-ink-faint: #656C7A;
-  --color-line:      #C6C1AD;
-  --color-line-soft: #D9D5C5;
+  --color-bg:        #10152A;
+  --color-bg-alt:    #171D34;
+  --color-card:      #1B2240;
+  --color-ink:       #F2EEE1;
+  --color-ink-soft:  #C9C4B4;
+  --color-ink-faint: #8D8A7C;
+  --color-line:      #3A4160;
+  --color-line-soft: #2A3050;
 
-  --color-indigo-dark: #16233B;
-  --color-indigo:      #26406B;
-  --color-indigo-mid:  #3E5578;
+  --color-gold-dark: #C9A24A;
+  --color-gold:      #D9B968;
+  --color-gold-mid:  #B6934A;
 
   --font-display: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
@@ -25,7 +25,7 @@
 
   --radius-sm: 3px;
 
-  color-scheme: light dark;
+  color-scheme: dark;
 }
 
 html {
@@ -60,7 +60,7 @@ h1, h2, h3 {
 }
 
 a {
-  color: var(--color-indigo-dark);
+  color: var(--color-gold-dark);
   text-decoration-color: var(--color-line);
   text-underline-offset: 3px;
 }
@@ -68,7 +68,7 @@ a:hover { text-decoration-color: currentColor; }
 
 img { max-width: 100%; display: block; }
 
-::selection { background: var(--color-indigo-mid); color: #fff; }
+::selection { background: var(--color-gold-mid); color: #fff; }
 
 /* subtle paper grain overlay */
 .grain {
@@ -76,9 +76,21 @@ img { max-width: 100%; display: block; }
   inset: 0;
   pointer-events: none;
   z-index: 999;
-  opacity: 0.02;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode: multiply;
+  mix-blend-mode: overlay;
+}
+
+.spotlight {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1100px;
+  height: 900px;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at center, rgba(217, 185, 104, 0.14) 0%, rgba(217, 185, 104, 0.05) 35%, transparent 65%);
 }
 
 /* ---------------- Header ---------------- */
@@ -101,7 +113,7 @@ img { max-width: 100%; display: block; }
   color: var(--color-ink);
   text-decoration: none;
 }
-.brand-mark { color: var(--color-indigo); display: inline-flex; }
+.brand-mark { color: var(--color-gold); display: inline-flex; }
 
 .site-nav { display: flex; gap: 28px; }
 .site-nav a {
@@ -109,7 +121,7 @@ img { max-width: 100%; display: block; }
   color: var(--color-ink-soft);
   text-decoration: none;
 }
-.site-nav a:hover { color: var(--color-indigo-dark); }
+.site-nav a:hover { color: var(--color-gold-dark); }
 
 @media (max-width: 640px) {
   .site-header { flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -128,10 +140,21 @@ img { max-width: 100%; display: block; }
 .hero-inner { max-width: 620px; }
 
 .hero-eyebrow {
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: var(--color-indigo-dark);
-  margin: 0 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--color-gold-dark);
+  margin: 0 0 20px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--color-gold-mid);
 }
 
 .hero-title {
@@ -159,27 +182,37 @@ img { max-width: 100%; display: block; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 13px 26px;
+  padding: 13px 30px;
   font-size: 0.95rem;
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   text-decoration: none;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
-  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
 .btn-primary {
-  background: var(--color-indigo-dark);
-  color: #F7F5EC;
+  background: var(--color-gold-dark);
+  color: #14172A;
+  border-color: var(--color-gold-dark);
 }
-.btn-primary:hover { background: var(--color-indigo); }
+.btn-primary:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(217, 185, 104, 0.18);
+}
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-ink);
-  border-color: var(--color-line);
+  color: var(--color-gold-dark);
+  border-color: var(--color-gold-mid);
 }
-.btn-ghost:hover { border-color: var(--color-ink); }
+.btn-ghost:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(217, 185, 104, 0.1);
+}
 
 .hero-period {
   margin-top: 56px;
@@ -197,7 +230,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 700;
-  color: var(--color-indigo-dark);
+  color: var(--color-gold-dark);
   margin: 0;
   line-height: 1.4;
 }
@@ -227,7 +260,7 @@ img { max-width: 100%; display: block; }
 
 .hero-day-time {
   font-variant-numeric: tabular-nums;
-  color: var(--color-indigo);
+  color: var(--color-gold);
   font-size: 0.9rem;
   margin: 0 0 2px;
 }
@@ -244,7 +277,7 @@ img { max-width: 100%; display: block; }
   top: 20px;
   width: 220px;
   height: 440px;
-  color: var(--color-indigo);
+  color: var(--color-gold);
   opacity: 0.55;
 }
 
@@ -268,12 +301,15 @@ img { max-width: 100%; display: block; }
   align-items: baseline;
   gap: 16px;
   margin-bottom: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .section-mark {
   font-family: var(--font-display);
+  font-weight: 600;
   font-size: 0.95rem;
-  color: var(--color-ink-faint);
+  color: var(--color-gold-dark);
 }
 
 .section-head h2 {
@@ -312,7 +348,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-body);
   font-weight: 600;
   margin-bottom: 8px;
-  color: var(--color-indigo-dark);
+  color: var(--color-gold-dark);
 }
 
 .about-card p {
@@ -362,7 +398,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-display);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--color-indigo-dark);
+  color: var(--color-gold-dark);
   font-size: 1rem;
   white-space: nowrap;
 }
@@ -397,7 +433,7 @@ img { max-width: 100%; display: block; }
 .news-date {
   font-family: var(--font-display);
   font-weight: 600;
-  color: var(--color-indigo-mid);
+  color: var(--color-gold-mid);
   font-size: 0.85rem;
   white-space: nowrap;
   width: 100px;
@@ -409,7 +445,7 @@ img { max-width: 100%; display: block; }
   font-size: 0.95rem;
 }
 
-.news-item:hover .news-text { color: var(--color-indigo-dark); }
+.news-item:hover .news-text { color: var(--color-gold-dark); }
 
 .news-embed {
   padding: 18px 0;
@@ -498,7 +534,7 @@ img { max-width: 100%; display: block; }
   color: var(--color-ink-soft);
   text-decoration: none;
 }
-.footer-links a:hover { color: var(--color-indigo-dark); }
+.footer-links a:hover { color: var(--color-gold-dark); }
 
 .footer-copy {
   font-size: 0.82rem;
@@ -514,45 +550,6 @@ img { max-width: 100%; display: block; }
 
 /* ---------------- Focus visibility ---------------- */
 a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--color-indigo-dark);
+  outline: 2px solid var(--color-gold-dark);
   outline-offset: 3px;
-}
-
-/* =========================================================
-   ダークモード / 端末側の強制ダーク表示への対応
-   （このブロックは末尾に置いて、上書きを確実に効かせています）
-   ========================================================= */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg:        #12151C;
-    --color-bg-alt:    #1A1F28;
-    --color-card:      #1F252F;
-    --color-ink:       #ECE9DE;
-    --color-ink-soft:  #C2C7D1;
-    --color-ink-faint: #8C93A3;
-    --color-line:      #333A46;
-    --color-line-soft: #262C37;
-
-    --color-indigo-dark: #A9C0E6;
-    --color-indigo:      #8CA6D4;
-    --color-indigo-mid:  #7C97C4;
-  }
-
-  .btn-primary {
-    background: var(--color-indigo-dark);
-    color: #12151C;
-  }
-  .btn-primary:hover {
-    background: var(--color-indigo);
-  }
-
-  ::selection {
-    background: var(--color-indigo-mid);
-    color: #12151C;
-  }
-
-  .grain {
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-  }
 }
