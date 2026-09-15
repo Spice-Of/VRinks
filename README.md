@@ -2,6 +2,8 @@
 
 VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pagesでの公開を想定した静的サイト構成になっています。
 
+https://spice-of.github.io/VRinks/
+
 ## ファイル構成
 
 - `index.html` … ページ本体
