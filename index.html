@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Of VRinks</title>
+<meta name="description" content="Spice Of VRinks — VRChatで活動するイベント団体が登壇し、自身のイベントを紹介するお披露目会。">
+
+<!-- OGP -->
+<meta property="og:title" content="Spice Of VRinks">
+<meta property="og:description" content="VRChatで活動するイベント団体が登壇し、自身のイベントを紹介するお披露目会。">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="color-scheme" content="light dark">
+
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="site-header" id="top">
+  <a class="brand" href="#top">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="22" height="22"><path d="M16 3c3 5 8 8 8 14a8 8 0 1 1-16 0c0-6 5-9 8-14z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    </span>
+    Spice Of VRinks
+  </a>
+  <nav class="site-nav" aria-label="サイト内ナビゲーション">
+    <a href="#news">最新情報</a>
+    <a href="#about">概要</a>
+    <a href="#lineup">タイムスケジュール</a>
+    <a href="#supporters">応援団体</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">VRChat Community Showcase</p>
+      <h1 class="hero-title">Spice Of<br>VRinks</h1>
+      <p class="hero-lede">
+        VRChatで活動するイベント団体が持ち回りで登壇し、それぞれが育ててきた
+        "スパイス" ―― 個性やこだわり ―― を持ち寄って紹介する会。
+        知らなかったコミュニティに出会う、小さな見本市です。
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#" id="group-join-link" target="_blank" rel="noopener">
+          グループに参加する
+        </a>
+        <a class="btn btn-ghost" href="#lineup">タイムスケジュールを見る</a>
+      </div>
+
+      <div class="hero-period">
+        <p class="hero-period-label">開催期間</p>
+        <p class="hero-period-range" id="hero-period-range">開催期間未定</p>
+
+        <div class="hero-days" id="hero-days">
+          <p class="loading-msg" data-role="hero-days-loading">読み込み中…</p>
+        </div>
+      </div>
+    </div>
+
+    <svg class="hero-sprig" viewBox="0 0 200 400" aria-hidden="true">
+      <path d="M100 400 C100 300 60 260 80 180 C95 120 70 60 100 0" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M100 340 C130 320 150 300 160 270" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M90 260 C60 245 45 220 40 195" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M105 170 C140 155 155 130 155 105" fill="none" stroke="currentColor" stroke-width="1"/>
+      <path d="M85 100 C55 90 40 65 38 40" fill="none" stroke="currentColor" stroke-width="1"/>
+    </svg>
+  </section>
+
+  <!-- ============ NEWS ============ -->
+  <section class="section" id="news">
+    <div class="section-inner narrow">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">01</span>
+        <h2>最新情報</h2>
+      </div>
+      <p class="section-note">告知やXでの投稿をこちらにまとめます。</p>
+      <div class="news-list" id="news-list">
+        <p class="loading-msg" data-role="news-loading">読み込み中…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section alt" id="about">
+    <div class="section-inner narrow">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">02</span>
+        <h2>概要</h2>
+      </div>
+      <p class="lead-text" id="about-lead">読み込み中…</p>
+      <p id="about-body"></p>
+      <div class="about-grid" id="about-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ SCHEDULE (簡易) ============ -->
+  <section class="section" id="lineup">
+    <div class="section-inner narrow">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">03</span>
+        <h2>タイムスケジュール</h2>
+      </div>
+      <p class="section-note">
+        各日程・各会場の時間の一覧です(簡易版)。登壇団体は決まり次第お知らせします。
+      </p>
+
+      <div id="schedule-detail">
+        <p class="loading-msg" data-role="schedule-loading">読み込み中…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUPPORTERS (応援団体) ============ -->
+  <section class="section alt" id="supporters">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">04</span>
+        <h2>応援団体</h2>
+      </div>
+      <p class="section-note">Spice Of VRinks を応援してくださっている団体さまです。</p>
+
+      <div class="supporter-grid" id="supporter-grid">
+        <p class="loading-msg" data-role="supporter-loading">読み込み中…</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ JOIN / CTA ============ -->
+  <section class="section cta-section">
+    <div class="section-inner narrow cta-inner">
+      <h2>グループに参加して、当日をお楽しみに</h2>
+      <p>Spice Of VRinks は VRChat のグループを通じて開催情報をお届けします。気になる団体を見つけたら、当日はぜひ本人たちの言葉で話を聞いてみてください。</p>
+      <a class="btn btn-primary" href="#" id="group-join-link-2" target="_blank" rel="noopener">
+        グループに参加する
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="18" height="18"><path d="M16 3c3 5 8 8 8 14a8 8 0 1 1-16 0c0-6 5-9 8-14z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </span>
+      Spice Of VRinks
+    </div>
+    <nav class="footer-links" aria-label="外部リンク">
+      <a href="#" id="footer-x-link" target="_blank" rel="noopener">X (Twitter)</a>
+      <a href="#" id="footer-group-link" target="_blank" rel="noopener">グループ</a>
+    </nav>
+    <p class="footer-copy">© <span id="footer-year"></span> Spice Of VRinks</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js" async></script>
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
