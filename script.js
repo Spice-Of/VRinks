@@ -258,27 +258,31 @@ function renderAdSlot(rows) {
   container.innerHTML = "";
   if (!rows || rows.length === 0) return;
 
-  const row = rows[Math.floor(Math.random() * rows.length)];
-
   const inner = document.createElement("div");
   inner.className = "ad-slot-inner";
 
-  const banner = document.createElement(row.link_url ? "a" : "div");
-  if (row.link_url) {
-    banner.href = row.link_url;
-    banner.target = "_blank";
-    banner.rel = "noopener";
-  }
+  const grid = document.createElement("div");
+  grid.className = "ad-grid";
 
-  if (row.banner_url) {
-    banner.className = "ad-banner";
-    banner.innerHTML = `<img src="${escapeAttr(row.banner_url)}" alt="${escapeAttr(row.name || "")}">`;
-  } else {
-    banner.className = "ad-banner text-only";
-    banner.textContent = row.name || "";
-  }
+  rows.forEach((row) => {
+    const banner = document.createElement(row.link_url ? "a" : "div");
+    if (row.link_url) {
+      banner.href = row.link_url;
+      banner.target = "_blank";
+      banner.rel = "noopener";
+    }
 
-  inner.appendChild(banner);
+    if (row.banner_url) {
+      banner.className = "ad-banner";
+      banner.innerHTML = `<img src="${escapeAttr(row.banner_url)}" alt="${escapeAttr(row.name || "")}">`;
+    } else {
+      banner.className = "ad-banner text-only";
+      banner.textContent = row.name || "";
+    }
+    grid.appendChild(banner);
+  });
+
+  inner.appendChild(grid);
   container.appendChild(inner);
 }
 

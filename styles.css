@@ -487,9 +487,19 @@ img { max-width: 100%; display: block; }
 }
 
 .ad-slot-inner {
-  max-width: var(--max-width-narrow);
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.ad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .ad-grid { grid-template-columns: 1fr; }
 }
 
 .ad-banner {
