@@ -2,65 +2,64 @@
 
 VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pagesでの公開を想定した静的サイト構成になっています。
 
-
-
-https://spice-of.github.io/VRinks/
-
-
-
 ## ファイル構成
 
-* `index.html` … ページ本体
-* `styles.css` … デザイン
-* `script.js` … CSV読み込み・描画などの挙動
-* `config.js` … **編集用の設定ファイル**(基本的にはここだけ触れば運用できます)
-* `Pic/` … ロゴ・バナーなど画像を置くフォルダ
+- `index.html` … ページ本体
+- `styles.css` … デザイン
+- `script.js` … CSV読み込み・描画などの挙動
+- `config.js` … **編集用の設定ファイル**(基本的にはここだけ触れば運用できます)
+- `Pic/` … ロゴ・バナーなど画像を置くフォルダ
 
 ## まず編集するところ(config.js)
 
 1. `eventDateRangeLabel` … ヒーローに大きく表示する開催期間の文言。
 2. `groupJoinUrl` … 参加するVRChatグループのページURL。
-3. `xUrl` … フッターのXリンク。
-4. `csv.about` / `csv.schedule` / `csv.news` / `csv.supporters` … 各コンテンツのデータ元。
+3. `backgroundImageUrl` … ページ全体の背景に敷く画像のURL(空欄なら無地の紺色背景のまま)。読みやすさのため、画像の上には紺色の半透明グラデーションを重ねています。`Pic` フォルダに画像を置く場合は `Pic/ファイル名.jpg` のような相対パスでOKです。
+4. `xUrl` … フッターのXリンク。
+5. `csv.about` / `csv.schedule` / `csv.news` / `csv.supporters` … 各コンテンツのデータ元。
 
 ## コンテンツはすべてGoogleスプレッドシートで管理できます
 
-概要・タイムスケジュール・最新情報・応援団体、**サイトの内容はすべて** Googleスプレッドシートから読み込むようになっています。文章や画像を差し替えたいときは、コードを触らずスプレッドシートを更新するだけでOKです。
+概要・タイムスケジュール・最新情報・広告枠、**サイトの内容はすべて** Googleスプレッドシートから読み込むようになっています。文章や画像を差し替えたいときは、コードを触らずスプレッドシートを更新するだけでOKです。
 
 1. Googleスプレッドシートで `about` / `schedule` / `news` / `supporters` をそれぞれ別シートで用意する
 2. 「ファイル」→「共有」→「ウェブに公開」で該当シートを **CSV形式** で公開する
-3. 発行されたURLを `config.js` の `csv.\*` に貼り付ける
+3. 発行されたURLを `config.js` の `csv.*` に貼り付ける
 
 各シートの列構成(1行目はヘッダー行にしてください):
 
-|シート|列|
-|-|-|
-|概要 (about)|`lead`, `body`, `card1\_title`, `card1\_text`, `card2\_title`, `card2\_text`, `card3\_title`, `card3\_text`|
-|タイムスケジュール (schedule)|`date`, `weekday`, `start\_time`, `end\_time`, `venue`|
-|最新情報 (news)|`date`, `text`, `link\_url`, `x\_post\_url`|
-|応援団体 (supporters)|`name`, `banner\_url`, `link\_url`|
+| シート | 列 |
+|---|---|
+| 概要 (about) | `hero_lede`, `lead`, `body`, `card1_title`, `card1_text`, `card2_title`, `card2_text`, `card3_title`, `card3_text` |
+| タイムスケジュール (schedule) | `date`, `weekday`, `start_time`, `end_time`, `venue` |
+| 最新情報 (news) | `date`, `text`, `link_url`, `x_post_url` |
+| 広告枠 (supporters) | `name`, `banner_url`, `link_url` |
 
 ### about シートについて
 
-**1行だけ**入力すれば反映されます(1団体1行ではなく、サイト全体で1行)。`card2\_title`〜`card3\_text` は使わない場合は空欄でOKです(その分のカードは表示されません)。
+**1行だけ**入力すれば反映されます(1団体1行ではなく、サイト全体で1行)。`hero_lede` はトップのヒーロー部分(タイトル直下)に出る説明文です。`card2_title`〜`card3_text` は使わない場合は空欄でOKです(その分のカードは表示されません)。
 
 ### news シートについて
 
-* `x\_post\_url` にXの投稿URL(例: `https://x.com/ユーザー名/status/12345`)を入れると、そのポストがそのまま埋め込み表示されます。
-* `x\_post\_url` が空欄の行は、`date` + `text` のシンプルな告知として表示されます。
-* 1行につき、テキスト告知かXポストのどちらか一方を選んで入力してください。
+- `x_post_url` にXの投稿URL(例: `https://x.com/ユーザー名/status/12345`)を入れると、そのポストがそのまま埋め込み表示されます。
+- `x_post_url` が空欄の行は、`date` + `text` のシンプルな告知として表示されます。
+- 1行につき、テキスト告知かXポストのどちらか一方を選んで入力してください。
 
-### supporters シートについて
+### supporters シート(広告枠)について
 
-`banner\_url` に横長のバナー画像URLを入れてください。`link\_url` を入れると、バナーがそのままリンクになります。
+一覧としては表示されません。**タイムスケジュールのすぐ下**に、ページを開くたびにこのシートの行から1件だけランダムに選ばれて、広告のようなバナー枠として表示されます。
 
-画像を `Pic` フォルダに入れて公開する場合は、`banner\_url` に `Pic/ファイル名.png` のような相対パスを入れればOKです(GitHub Pagesなどでこのフォルダ一式をそのまま公開している場合)。外部の画像URLを使う場合はそのままフルURLを入れてください。
+`banner_url` に横長のバナー画像URL(16:9推奨)を入れてください。`link_url` を入れると、バナーがそのままリンクになります。
+
+画像を `Pic` フォルダに入れて公開する場合は、`banner_url` に `Pic/ファイル名.png` のような相対パスを入れればOKです(GitHub Pagesなどでこのフォルダ一式をそのまま公開している場合)。外部の画像URLを使う場合はそのままフルURLを入れてください。
+
+※ 現在ページ上の「応援団体」セクションは非表示にしています。応援団体の掲載先が決まったら、別枠として追加します。
 
 ### 登壇団体・MC・コメンテーターについて
 
 現時点では未確定のため、サイトには表示していません。決まり次第、あらためて組み込みます(ページ構成自体はすでに用意してあるので、データが揃えばすぐに反映できます)。
 
-`csv.\*` を空欄のままにしておくと、`config.js` 内の `FALLBACK\_\*` のサンプルデータが代わりに表示されます。実データが決まるまでの確認用にお使いください。
+`csv.*` を空欄のままにしておくと、`config.js` 内の `FALLBACK_*` のサンプルデータが代わりに表示されます。実データが決まるまでの確認用にお使いください。
 
 ## GitHub Pagesでの公開
 
@@ -71,4 +70,3 @@ https://spice-of.github.io/VRinks/
 ## デザインについて
 
 濃紺(藍色)の会場に金色の装飾をあわせた、レセプション/ガラパーティーのような華やかな路線にしています。見出しは和文セリフ(Shippori Mincho)、本文はゴシック(Noto Sans JP)。サイト全体を常時ダークテーマとして表示するように固定しているので(`color-scheme: dark`)、端末の設定に関わらずこの配色で表示されます。カラーやフォントを変えたい場合は `styles.css` 冒頭の `:root` 内の変数(`--color-bg` や `--color-gold` など)を書き換えるだけで全体に反映されます。
-
