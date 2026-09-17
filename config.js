@@ -11,12 +11,12 @@ const SITE_CONFIG = {
   // 参加するVRChatグループのページURL
   groupJoinUrl: "https://vrc.group/SSC.6137",
 
-  // X (Twitter) のプロフィールURL（フッター用）
-  xUrl: "https://x.com/SpiceOfVRinks?s=20",
-
   // ページ全体の背景に敷く画像のURL（空欄なら無地の紺色背景のまま）
   // 画像の上には読みやすさのため紺色の半透明グラデーションを重ねています
   backgroundImageUrl: "Pic/Untitled_Design_24.png",
+
+  // X (Twitter) のプロフィールURL（フッター用）
+  xUrl: "https://x.com/SpiceOfVRinks?s=20",
 
   /* ---------------------------------------------------------
      データソース（Googleスプレッドシート「ウェブに公開」→CSV）
