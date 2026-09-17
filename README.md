@@ -14,12 +14,13 @@ VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pages�
 
 1. `eventDateRangeLabel` … ヒーローに大きく表示する開催期間の文言。
 2. `groupJoinUrl` … 参加するVRChatグループのページURL。
-3. `xUrl` … フッターのXリンク。
-4. `csv.about` / `csv.schedule` / `csv.news` / `csv.supporters` … 各コンテンツのデータ元。
+3. `backgroundImageUrl` … ページ全体の背景に敷く画像のURL(空欄なら無地の紺色背景のまま)。読みやすさのため、画像の上には紺色の半透明グラデーションを重ねています。`Pic` フォルダに画像を置く場合は `Pic/ファイル名.jpg` のような相対パスでOKです。
+4. `xUrl` … フッターのXリンク。
+5. `csv.about` / `csv.schedule` / `csv.news` / `csv.supporters` … 各コンテンツのデータ元。
 
 ## コンテンツはすべてGoogleスプレッドシートで管理できます
 
-概要・タイムスケジュール・最新情報・応援団体、**サイトの内容はすべて** Googleスプレッドシートから読み込むようになっています。文章や画像を差し替えたいときは、コードを触らずスプレッドシートを更新するだけでOKです。
+概要・タイムスケジュール・最新情報・広告枠、**サイトの内容はすべて** Googleスプレッドシートから読み込むようになっています。文章や画像を差し替えたいときは、コードを触らずスプレッドシートを更新するだけでOKです。
 
 1. Googleスプレッドシートで `about` / `schedule` / `news` / `supporters` をそれぞれ別シートで用意する
 2. 「ファイル」→「共有」→「ウェブに公開」で該当シートを **CSV形式** で公開する
@@ -29,14 +30,14 @@ VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pages�
 
 | シート | 列 |
 |---|---|
-| 概要 (about) | `lead`, `body`, `card1_title`, `card1_text`, `card2_title`, `card2_text`, `card3_title`, `card3_text` |
+| 概要 (about) | `hero_lede`, `lead`, `body`, `card1_title`, `card1_text`, `card2_title`, `card2_text`, `card3_title`, `card3_text` |
 | タイムスケジュール (schedule) | `date`, `weekday`, `start_time`, `end_time`, `venue` |
 | 最新情報 (news) | `date`, `text`, `link_url`, `x_post_url` |
-| 応援団体 (supporters) | `name`, `banner_url`, `link_url` |
+| 広告枠 (supporters) | `name`, `banner_url`, `link_url` |
 
 ### about シートについて
 
-**1行だけ**入力すれば反映されます(1団体1行ではなく、サイト全体で1行)。`card2_title`〜`card3_text` は使わない場合は空欄でOKです(その分のカードは表示されません)。
+**1行だけ**入力すれば反映されます(1団体1行ではなく、サイト全体で1行)。`hero_lede` はトップのヒーロー部分(タイトル直下)に出る説明文です。`card2_title`〜`card3_text` は使わない場合は空欄でOKです(その分のカードは表示されません)。
 
 ### news シートについて
 
@@ -44,11 +45,15 @@ VRChatイベント「Spice Of VRinks」の特設サイトです。GitHub Pages�
 - `x_post_url` が空欄の行は、`date` + `text` のシンプルな告知として表示されます。
 - 1行につき、テキスト告知かXポストのどちらか一方を選んで入力してください。
 
-### supporters シートについて
+### supporters シート(広告枠)について
 
-`banner_url` に横長のバナー画像URLを入れてください。`link_url` を入れると、バナーがそのままリンクになります。
+一覧としては表示されません。**タイムスケジュールのすぐ下**に、ページを開くたびにこのシートの行から1件だけランダムに選ばれて、広告のようなバナー枠として表示されます。
+
+`banner_url` に横長のバナー画像URL(16:9推奨)を入れてください。`link_url` を入れると、バナーがそのままリンクになります。
 
 画像を `Pic` フォルダに入れて公開する場合は、`banner_url` に `Pic/ファイル名.png` のような相対パスを入れればOKです(GitHub Pagesなどでこのフォルダ一式をそのまま公開している場合)。外部の画像URLを使う場合はそのままフルURLを入れてください。
+
+※ 現在ページ上の「応援団体」セクションは非表示にしています。応援団体の掲載先が決まったら、別枠として追加します。
 
 ### 登壇団体・MC・コメンテーターについて
 

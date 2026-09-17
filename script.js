@@ -30,6 +30,11 @@ function applyLinks() {
   if (periodEl && SITE_CONFIG.eventDateRangeLabel) {
     periodEl.textContent = SITE_CONFIG.eventDateRangeLabel;
   }
+
+  const bgPhoto = document.getElementById("bg-photo");
+  if (bgPhoto && SITE_CONFIG.backgroundImageUrl) {
+    bgPhoto.style.backgroundImage = `url("${SITE_CONFIG.backgroundImageUrl}")`;
+  }
 }
 
 /* ---------------- CSV読み込み共通処理 ---------------- */
@@ -63,6 +68,9 @@ function loadAbout() {
 }
 
 function renderAbout(data) {
+  const heroLedeEl = document.getElementById("hero-lede");
+  if (heroLedeEl && data.hero_lede) heroLedeEl.textContent = data.hero_lede;
+
   const leadEl = document.getElementById("about-lead");
   const bodyEl = document.getElementById("about-body");
   if (leadEl) leadEl.textContent = data.lead || "";
@@ -235,36 +243,43 @@ function renderNews(rows) {
   }
 }
 
-/* ---------------- 応援団体 ---------------- */
+/* ---------------- 広告枠（Supportersからランダムに1件表示） ---------------- */
 function loadSupporters() {
   loadCsv(
     SITE_CONFIG.csv.supporters,
-    (rows) => renderSupporters(rows),
-    () => renderSupporters(FALLBACK_SUPPORTERS)
+    (rows) => renderAdSlot(rows),
+    () => renderAdSlot(FALLBACK_SUPPORTERS)
   );
 }
 
-function renderSupporters(rows) {
-  const container = document.getElementById("supporter-grid");
+function renderAdSlot(rows) {
+  const container = document.getElementById("ad-slot");
+  if (!container) return;
   container.innerHTML = "";
+  if (!rows || rows.length === 0) return;
 
-  rows.forEach((row) => {
-    const cell = document.createElement(row.link_url ? "a" : "div");
-    if (row.link_url) {
-      cell.href = row.link_url;
-      cell.target = "_blank";
-      cell.rel = "noopener";
-    }
+  const row = rows[Math.floor(Math.random() * rows.length)];
 
-    if (row.banner_url) {
-      cell.className = "supporter-cell";
-      cell.innerHTML = `<img src="${escapeAttr(row.banner_url)}" alt="${escapeAttr(row.name || "")}">`;
-    } else {
-      cell.className = "supporter-cell text-only";
-      cell.textContent = row.name || "";
-    }
-    container.appendChild(cell);
-  });
+  const inner = document.createElement("div");
+  inner.className = "ad-slot-inner";
+
+  const banner = document.createElement(row.link_url ? "a" : "div");
+  if (row.link_url) {
+    banner.href = row.link_url;
+    banner.target = "_blank";
+    banner.rel = "noopener";
+  }
+
+  if (row.banner_url) {
+    banner.className = "ad-banner";
+    banner.innerHTML = `<img src="${escapeAttr(row.banner_url)}" alt="${escapeAttr(row.name || "")}">`;
+  } else {
+    banner.className = "ad-banner text-only";
+    banner.textContent = row.name || "";
+  }
+
+  inner.appendChild(banner);
+  container.appendChild(inner);
 }
 
 /* ---------------- ユーティリティ ---------------- */
