@@ -21,8 +21,6 @@
 </head>
 <body>
 
-<div class="bg-photo" id="bg-photo"></div>
-<div class="bg-photo-overlay"></div>
 <div class="grain"></div>
 <div class="spotlight"></div>
 
@@ -37,6 +35,7 @@
     <a href="#news">最新情報</a>
     <a href="#about">概要</a>
     <a href="#lineup">タイムスケジュール</a>
+    <a href="#supporters">応援団体</a>
   </nav>
 </header>
 
@@ -47,7 +46,7 @@
     <div class="hero-inner">
       <p class="hero-eyebrow">VRChat Community Showcase</p>
       <h1 class="hero-title">Spice Of<br>VRinks</h1>
-      <p class="hero-lede" id="hero-lede">
+      <p class="hero-lede">
         VRChatで活動するイベント団体が持ち回りで登壇し、それぞれが育ててきた
         "スパイス" ―― 個性やこだわり ―― を持ち寄って紹介する会。
         知らなかったコミュニティに出会う、小さな見本市です。
@@ -122,8 +121,20 @@
     </div>
   </section>
 
-  <!-- ============ AD SLOT（Supportersからランダムに1件表示） ============ -->
-  <div class="ad-slot" id="ad-slot"></div>
+  <!-- ============ SUPPORTERS (応援団体) ============ -->
+  <section class="section alt" id="supporters">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">04</span>
+        <h2>応援団体</h2>
+      </div>
+      <p class="section-note">Spice Of VRinks を応援してくださっている団体さまです。</p>
+
+      <div class="supporter-grid" id="supporter-grid">
+        <p class="loading-msg" data-role="supporter-loading">読み込み中…</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ JOIN / CTA ============ -->
   <section class="section cta-section">
