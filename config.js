@@ -16,7 +16,7 @@ const SITE_CONFIG = {
 
   // ページ全体の背景に敷く画像のURL（空欄なら無地の紺色背景のまま）
   // 画像の上には読みやすさのため紺色の半透明グラデーションを重ねています
-  backgroundImageUrl: "pic/Untitled_Design_24.png",
+  backgroundImageUrl: "Pic/Untitled_Design_24.png",
 
   /* ---------------------------------------------------------
      データソース（Googleスプレッドシート「ウェブに公開」→CSV）
