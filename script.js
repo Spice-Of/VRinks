@@ -5,6 +5,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   applyLinks();
+  initLightbox();
   loadAbout();
   loadSchedule();
   loadNews();
@@ -312,14 +313,46 @@ function renderGallery(rows) {
   }
 
   images.forEach((row) => {
-    const item = document.createElement("a");
+    const item = document.createElement("button");
+    item.type = "button";
     item.className = "gallery-item";
-    item.href = row.image_url;
-    item.target = "_blank";
-    item.rel = "noopener";
     item.innerHTML = `<img src="${escapeAttr(row.image_url)}" alt="" loading="lazy">`;
+    item.addEventListener("click", () => openLightbox(row.image_url));
     container.appendChild(item);
   });
+}
+
+/* ---------------- ライトボックス（過去の様子のポップアップ表示） ---------------- */
+function initLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const closeBtn = document.getElementById("lightbox-close");
+  if (!lightbox || !closeBtn) return;
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLightbox();
+  });
+}
+
+function openLightbox(url) {
+  const lightbox = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  if (!lightbox || !img) return;
+  img.src = url;
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-img");
+  if (!lightbox) return;
+  lightbox.classList.remove("is-open");
+  lightbox.setAttribute("aria-hidden", "true");
+  if (img) img.src = "";
 }
 
 /* ---------------- ユーティリティ ---------------- */

@@ -544,8 +544,13 @@ img { max-width: 100%; display: block; }
 
 .gallery-item {
   display: block;
+  width: 100%;
   background: var(--color-card);
   overflow: hidden;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .gallery-item img {
@@ -618,4 +623,54 @@ img { max-width: 100%; display: block; }
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--color-gold-dark);
   outline-offset: 3px;
+}
+
+/* ---------------- Lightbox (過去の様子のポップアップ表示) ---------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(10, 13, 24, 0.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-img {
+  max-width: min(90vw, 1100px);
+  max-height: 85vh;
+  object-fit: contain;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-gold-mid);
+  background: transparent;
+  color: var(--color-gold);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.lightbox-close:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold-dark);
 }
