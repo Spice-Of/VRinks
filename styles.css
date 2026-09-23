@@ -291,20 +291,6 @@ img { max-width: 100%; display: block; }
   margin: 0;
 }
 
-.hero-sprig {
-  position: absolute;
-  right: -20px;
-  top: 20px;
-  width: 220px;
-  height: 440px;
-  color: var(--color-gold);
-  opacity: 0.55;
-}
-
-@media (max-width: 900px) {
-  .hero-sprig { display: none; }
-}
-
 /* ---------------- Section shell ---------------- */
 .section { padding: 96px 0; }
 .section.alt { background: var(--color-bg-alt); }
