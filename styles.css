@@ -534,6 +534,42 @@ img { max-width: 100%; display: block; }
 .cta-inner h2 { font-size: 1.9rem; margin-bottom: 14px; }
 .cta-inner p { color: var(--color-ink-soft); max-width: 50ch; margin: 0 0 28px; }
 
+/* ---------------- Gallery (過去の様子) ---------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--color-line-soft);
+  border: 1px solid var(--color-line-soft);
+}
+
+.gallery-item {
+  display: block;
+  background: var(--color-card);
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+  opacity: 0.9;
+}
+
+@media (max-width: 860px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 /* ---------------- Footer ---------------- */
 .site-footer {
   border-top: 1px solid var(--color-line);

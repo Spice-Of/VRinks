@@ -29,6 +29,7 @@ const SITE_CONFIG = {
     schedule:   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=867582881&single=true&output=csv", // タイムスケジュールシートのCSV公開URL
     news:       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=2040822935&single=true&output=csv", // 最新情報シートのCSV公開URL
     supporters: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=359879489&single=true&output=csv", // 応援団体シートのCSV公開URL
+    gallery:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1985497496&single=true&output=csv", // 過去の様子(一番下のギャラリー)シートのCSV公開URL
   },
 
   /* ---------------------------------------------------------
@@ -55,6 +56,13 @@ const SITE_CONFIG = {
      ■ supporters（応援団体）
        name, banner_url, link_url
        - banner_url はバナー画像のURL（横長画像推奨）
+
+     ■ gallery（過去の様子・一番下のギャラリー）
+       image_url
+       - 1行につき画像1枚。行の数だけ画像が並びます
+       - 他の画像と同じ扱いです。外部URLでも、Picフォルダに画像を置いて
+         「Pic/ファイル名.jpg」のような相対パスを入れてもOKです
+
      --------------------------------------------------------- */
 };
 

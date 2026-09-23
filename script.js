@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSchedule();
   loadNews();
   loadSupporters();
+  loadGallery();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
 
@@ -70,6 +71,9 @@ function loadAbout() {
 function renderAbout(data) {
   const heroLedeEl = document.getElementById("hero-lede");
   if (heroLedeEl && data.hero_lede) heroLedeEl.textContent = data.hero_lede;
+
+  const galleryTitleEl = document.getElementById("gallery-title");
+  if (galleryTitleEl && data.gallery_title) galleryTitleEl.textContent = data.gallery_title;
 
   const leadEl = document.getElementById("about-lead");
   const bodyEl = document.getElementById("about-body");
@@ -284,6 +288,38 @@ function renderAdSlot(rows) {
 
   inner.appendChild(grid);
   container.appendChild(inner);
+}
+
+/* ---------------- 過去の様子（一番下のギャラリー） ---------------- */
+function loadGallery() {
+  loadCsv(
+    SITE_CONFIG.csv.gallery,
+    (rows) => renderGallery(rows),
+    () => renderGallery(FALLBACK_GALLERY)
+  );
+}
+
+function renderGallery(rows) {
+  const container = document.getElementById("gallery-grid");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const images = (rows || []).filter((row) => row.image_url);
+
+  if (images.length === 0) {
+    container.innerHTML = `<p class="loading-msg">まだ画像がありません。</p>`;
+    return;
+  }
+
+  images.forEach((row) => {
+    const item = document.createElement("a");
+    item.className = "gallery-item";
+    item.href = row.image_url;
+    item.target = "_blank";
+    item.rel = "noopener";
+    item.innerHTML = `<img src="${escapeAttr(row.image_url)}" alt="" loading="lazy">`;
+    container.appendChild(item);
+  });
 }
 
 /* ---------------- ユーティリティ ---------------- */
