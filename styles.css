@@ -255,6 +255,11 @@ img { max-width: 100%; display: block; }
   line-height: 1.4;
 }
 
+/* 広い画面では開催期間を1行に保つ(左カラム幅を超えてもはみ出して表示) */
+@media (min-width: 900px) {
+  .hero-period-range { white-space: nowrap; }
+}
+
 .hero-days {
   margin-top: 28px;
   display: grid;
