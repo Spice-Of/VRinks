@@ -660,3 +660,124 @@ a:focus-visible, button:focus-visible {
   border-color: var(--color-gold);
   color: var(--color-gold-dark);
 }
+
+/* ---------------- Ambassadors (アンバサダー) ---------------- */
+[hidden] { display: none !important; }
+
+.ambassador-list {
+  --amb-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 36px var(--amb-gap);
+  margin-top: 36px;
+}
+
+.ambassador-card {
+  /* PC: 5人で1列 / 人数が違っても同じ幅で中央に折り返す */
+  flex: 0 0 calc((100% - 4 * var(--amb-gap)) / 5);
+  min-width: 0;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ambassador-figure {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  background:
+    radial-gradient(ellipse 85% 60% at 50% 0%, rgba(217, 185, 104, 0.20) 0%, rgba(217, 185, 104, 0) 70%),
+    linear-gradient(180deg, var(--color-card) 0%, var(--color-bg) 100%);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+/* 足元のステージライン */
+.ambassador-figure::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 10px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-mid), transparent);
+  opacity: 0.8;
+}
+
+.ambassador-figure img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 10px 6px 14px;
+  transition: transform 300ms ease;
+}
+
+.ambassador-noimage {
+  width: 38%;
+  aspect-ratio: 1 / 2;
+  margin-bottom: 18px;
+  border: 1px dashed var(--color-line);
+  border-radius: 40% 40% 6px 6px;
+  opacity: 0.6;
+}
+
+.ambassador-name {
+  margin: 14px 0 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+
+.ambassador-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.ambassador-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-gold-mid);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--color-gold);
+  text-decoration: none;
+  transition: background 200ms ease, box-shadow 200ms ease;
+}
+.ambassador-link:hover,
+.ambassador-link:focus-visible {
+  background: rgba(217, 185, 104, 0.14);
+  box-shadow: 0 0 10px rgba(217, 185, 104, 0.3);
+}
+
+.ambassador-card:hover .ambassador-figure {
+  border-color: var(--color-gold-mid);
+  box-shadow: 0 0 0 3px rgba(217, 185, 104, 0.12);
+}
+
+/* タブレット: 3列(5人なら 3+2 で中央寄せ) */
+@media (max-width: 860px) {
+  .ambassador-card { flex-basis: calc((100% - 2 * var(--amb-gap)) / 3); }
+}
+
+/* スマホ: 2列(5人なら 2+2+1 で最後は中央) */
+@media (max-width: 520px) {
+  .ambassador-list { --amb-gap: 14px; }
+  .ambassador-card { flex-basis: calc((100% - var(--amb-gap)) / 2); }
+}

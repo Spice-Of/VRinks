@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSchedule();
   loadNews();
   loadSupporters();
+  loadAmbassadors();
   loadGallery();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
@@ -291,12 +292,113 @@ function renderAdSlot(rows) {
   container.appendChild(inner);
 }
 
+/* ---------------- アンバサダー ---------------- */
+function loadAmbassadors() {
+  loadCsv(
+    SITE_CONFIG.csv.ambassadors,
+    (rows) => renderAmbassadors(rows),
+    () => renderAmbassadors(typeof FALLBACK_AMBASSADORS !== "undefined" ? FALLBACK_AMBASSADORS : [])
+  );
+}
+
+function renderAmbassadors(rows) {
+  const section = document.getElementById("ambassadors");
+  const container = document.getElementById("ambassador-list");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const people = (rows || []).filter((row) => row.name);
+
+  // 1人もいなければセクションごと非表示
+  if (people.length === 0) {
+    if (section) section.hidden = true;
+    return;
+  }
+  if (section) section.hidden = false;
+
+  people.forEach((row) => {
+    const card = document.createElement("div");
+    card.className = "ambassador-card";
+
+    const figure = row.image_url
+      ? `<img src="${escapeAttr(row.image_url)}" alt="${escapeAttr(row.name)}" loading="lazy">`
+      : `<span class="ambassador-noimage" aria-hidden="true"></span>`;
+
+    const linksHtml = collectAmbassadorLinks(row)
+      .map(
+        (l) =>
+          `<a class="ambassador-link" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label)}<span aria-hidden="true">↗</span></a>`
+      )
+      .join("");
+
+    card.innerHTML = `
+      <div class="ambassador-figure">${figure}</div>
+      <p class="ambassador-name">${escapeHtml(row.name)}</p>
+      ${linksHtml ? `<div class="ambassador-links">${linksHtml}</div>` : ""}
+    `;
+    container.appendChild(card);
+  });
+}
+
+/* 1人分の活動リンクを集める
+   link1_url / link1_label 〜 link6_url / link6_label（ラベルは空欄ならURLから自動判定）
+   従来の link_url 1本だけの書き方も、そのまま使えます */
+function collectAmbassadorLinks(row) {
+  const candidates = [{ url: row.link_url, label: row.link_label }];
+  for (let n = 1; n <= 6; n++) {
+    candidates.push({ url: row[`link${n}_url`], label: row[`link${n}_label`] });
+  }
+
+  const seen = new Set();
+  const links = [];
+  candidates.forEach((c) => {
+    const url = safeHttpUrl(c.url);
+    if (!url || seen.has(url)) return;
+    seen.add(url);
+    links.push({ url, label: (c.label || "").trim() || guessLinkLabel(url) });
+  });
+  return links;
+}
+
+/* http / https のURLだけを通す（それ以外は無視） */
+function safeHttpUrl(value) {
+  const v = String(value || "").trim();
+  return /^https?:\/\//i.test(v) ? v : "";
+}
+
+/* ラベルが空欄のとき、URLのドメインから表示名を決める */
+function guessLinkLabel(url) {
+  let host = "";
+  try {
+    host = new URL(url).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch (e) {
+    return "リンク";
+  }
+  const known = [
+    [/(^|\.)(x\.com|twitter\.com)$/, "X"],
+    [/(^|\.)(youtube\.com|youtu\.be)$/, "YouTube"],
+    [/(^|\.)twitch\.tv$/, "Twitch"],
+    [/(^|\.)instagram\.com$/, "Instagram"],
+    [/(^|\.)tiktok\.com$/, "TikTok"],
+    [/(^|\.)discord\.(gg|com)$/, "Discord"],
+    [/(^|\.)(vrchat\.com|vrc\.group)$/, "VRChat"],
+    [/(^|\.)booth\.pm$/, "BOOTH"],
+    [/(^|\.)pixiv\.net$/, "pixiv"],
+    [/(^|\.)(note\.com)$/, "note"],
+    [/(^|\.)(bsky\.app)$/, "Bluesky"],
+  ];
+  for (const [re, label] of known) {
+    if (re.test(host)) return label;
+  }
+  return host || "リンク";
+}
+
 /* ---------------- 過去の様子（一番下のギャラリー） ---------------- */
 function loadGallery() {
   loadCsv(
     SITE_CONFIG.csv.gallery,
     (rows) => renderGallery(rows),
-    () => renderGallery(FALLBACK_GALLERY)
+    () => renderGallery(typeof FALLBACK_GALLERY !== "undefined" ? FALLBACK_GALLERY : [])
   );
 }
 
