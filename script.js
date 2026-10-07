@@ -77,6 +77,8 @@ function renderAbout(data) {
   const galleryTitleEl = document.getElementById("gallery-title");
   if (galleryTitleEl && data.gallery_title) galleryTitleEl.textContent = data.gallery_title;
 
+  renderYoutube(data.youtube_url || SITE_CONFIG.youtubeUrl);
+
   const leadEl = document.getElementById("about-lead");
   const bodyEl = document.getElementById("about-body");
   if (leadEl) leadEl.textContent = data.lead || "";
@@ -457,4 +459,47 @@ function escapeHtml(str) {
 }
 function escapeAttr(str) {
   return escapeHtml(str).replace(/"/g, "&quot;");
+}
+
+
+/* ---------------- 公式YouTube埋め込み ---------------- */
+// 受け付ける形式: チャンネルID(UC…) / youtube.com/channel/UC… / 再生リスト / 動画URL
+// @ハンドル形式のURLは埋め込めないため、リンクボタンとして表示します
+function youtubeEmbedSrc(input) {
+  const v = (input || "").trim();
+  if (!v) return null;
+  if (/^UC[\w-]{20,}$/.test(v)) return "https://www.youtube-nocookie.com/embed/videoseries?list=UU" + v.slice(2);
+  let u;
+  try { u = new URL(v); } catch (e) { return null; }
+  if (!/(^|\.)(youtube\.com|youtu\.be)$/i.test(u.hostname)) return null;
+  const list = u.searchParams.get("list");
+  if (list) return "https://www.youtube-nocookie.com/embed/videoseries?list=" + encodeURIComponent(list);
+  const ch = u.pathname.match(/^\/channel\/(UC[\w-]{20,})/);
+  if (ch) return "https://www.youtube-nocookie.com/embed/videoseries?list=UU" + ch[1].slice(2);
+  let id = u.searchParams.get("v");
+  if (!id && /youtu\.be$/i.test(u.hostname)) id = u.pathname.slice(1);
+  const m = u.pathname.match(/^\/(?:embed|shorts|live)\/([\w-]+)/);
+  if (!id && m) id = m[1];
+  return id ? "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) : null;
+}
+
+function renderYoutube(input) {
+  const block = document.getElementById("youtube-block");
+  const frame = document.getElementById("youtube-frame");
+  if (!block || !frame) return;
+  frame.innerHTML = "";
+  const src = youtubeEmbedSrc(input);
+  if (src) {
+    frame.innerHTML = `<iframe src="${escapeAttr(src)}" title="公式YouTubeチャンネル" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+    block.hidden = false;
+    return;
+  }
+  const link = safeHttpUrl((input || "").trim());
+  if (link && /^https?:\/\/([\w-]+\.)*youtube\.com\//i.test(link)) {
+    frame.className = "youtube-frame youtube-frame-link";
+    frame.innerHTML = `<a class="news-link" href="${escapeAttr(link)}" target="_blank" rel="noopener">YouTubeチャンネルを見る<span aria-hidden="true">↗</span></a>`;
+    block.hidden = false;
+    return;
+  }
+  block.hidden = true;
 }

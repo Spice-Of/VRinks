@@ -18,6 +18,8 @@ const SITE_CONFIG = {
   // 画像の上には読みやすさのため紺色の半透明グラデーションを重ねています
   backgroundImageUrl: "Pic/Untitled_Design_24.png",
 
+  youtubeUrl: "UCuRlvS_4nGsowPzFmHMGW6A",
+
   /* ---------------------------------------------------------
      データソース（Googleスプレッドシート「ウェブに公開」→CSV）
      スプレッドシート側で「ファイル > 共有 > ウェブに公開」から
