@@ -201,30 +201,21 @@ function renderNews(rows) {
   let hasEmbed = false;
 
   rows.forEach((row) => {
-    if (row.x_post_url) {
-      hasEmbed = true;
-      const wrap = document.createElement("div");
-      wrap.className = "news-embed";
-      wrap.innerHTML = `
-        ${row.date ? `<span class="news-date">${escapeHtml(row.date)}</span>` : ""}
-        <blockquote class="twitter-tweet">
-          <a href="${escapeAttr(row.x_post_url)}"></a>
-        </blockquote>
-      `;
-      container.appendChild(wrap);
-      return;
-    }
+    const text = (row.text || "").trim();
+    const linkUrl = safeHttpUrl((row.link_url || "").trim());
+    const xUrl = safeHttpUrl((row.x_post_url || "").trim());
+    if (!text && !linkUrl && !xUrl) return;
+    if (xUrl) hasEmbed = true;
 
-    const item = document.createElement(row.link_url ? "a" : "div");
-    item.className = "news-item";
-    if (row.link_url) {
-      item.href = row.link_url;
-      item.target = "_blank";
-      item.rel = "noopener";
-    }
+    const item = document.createElement("div");
+    item.className = "news-item" + (xUrl ? " has-embed" : "");
     item.innerHTML = `
       <span class="news-date">${escapeHtml(row.date || "")}</span>
-      <span class="news-text">${escapeHtml(row.text || "")}</span>
+      <div class="news-body">
+        ${text ? `<p class="news-text">${escapeHtml(text)}</p>` : ""}
+        ${linkUrl ? `<a class="news-link" href="${escapeAttr(linkUrl)}" target="_blank" rel="noopener">${escapeHtml(text ? guessLinkLabel(linkUrl) : (row.link_label || guessLinkLabel(linkUrl)))}<span aria-hidden="true">↗</span></a>` : ""}
+        ${xUrl ? `<blockquote class="twitter-tweet"><a href="${escapeAttr(xUrl)}"></a></blockquote>` : ""}
+      </div>
     `;
     container.appendChild(item);
   });

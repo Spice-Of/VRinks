@@ -29,6 +29,7 @@ const SITE_CONFIG = {
     schedule:   "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=867582881&single=true&output=csv", // タイムスケジュールシートのCSV公開URL
     news:       "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=2040822935&single=true&output=csv", // 最新情報シートのCSV公開URL
     supporters: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=359879489&single=true&output=csv", // 応援団体シートのCSV公開URL
+    ambassadors: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=323996253&single=true&output=csv",
     gallery:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1985497496&single=true&output=csv", // 過去の様子(一番下のギャラリー)シートのCSV公開URL
   },
 
@@ -106,3 +107,13 @@ const FALLBACK_SUPPORTERS = [
   { name: "応援団体募集中", banner_url: "", link_url: "#" },
   { name: "応援団体募集中", banner_url: "", link_url: "#" },
 ];
+
+const FALLBACK_AMBASSADORS = [
+  { name: "アンバサダー1", image_url: "", link1_label: "X", link1_url: "", link2_label: "YouTube", link2_url: "" },
+  { name: "アンバサダー2", image_url: "", link1_label: "X", link1_url: "", link2_label: "YouTube", link2_url: "" },
+  { name: "アンバサダー3", image_url: "", link1_label: "X", link1_url: "", link2_label: "YouTube", link2_url: "" },
+  { name: "アンバサダー4", image_url: "", link1_label: "X", link1_url: "", link2_label: "YouTube", link2_url: "" },
+  { name: "アンバサダー5", image_url: "", link1_label: "X", link1_url: "", link2_label: "YouTube", link2_url: "" },
+];
+
+const FALLBACK_GALLERY = [];
