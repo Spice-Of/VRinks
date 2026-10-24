@@ -720,6 +720,36 @@ a:focus-visible, button:focus-visible {
 /* ---------------- Ambassadors (アンバサダー) ---------------- */
 [hidden] { display: none !important; }
 
+.performer-list {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.performer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--color-line-soft);
+  background: rgba(255, 255, 255, 0.02);
+  min-width: 0;
+}
+.performer-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+}
+.performer-x { max-width: 100%; overflow-wrap: anywhere; }
+@media (max-width: 860px) { .performer-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .performer-list { grid-template-columns: 1fr; } }
+
 .ambassador-list {
   --amb-gap: 20px;
   display: flex;

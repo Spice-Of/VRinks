@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSchedule();
   loadNews();
   loadSupporters();
+  loadPerformers();
   loadAmbassadors();
   loadGallery();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
@@ -502,4 +503,48 @@ function renderYoutube(input) {
     return;
   }
   block.hidden = true;
+}
+
+
+/* ---------------- 登壇団体 ---------------- */
+function loadPerformers() {
+  loadCsv(
+    SITE_CONFIG.csv.performers,
+    (rows) => renderPerformers(rows),
+    () => renderPerformers(typeof FALLBACK_PERFORMERS !== "undefined" ? FALLBACK_PERFORMERS : [])
+  );
+}
+
+// x_url には「https://x.com/xxx」「@xxx」「xxx」のどれを書いてもOK
+function normalizeXUrl(value) {
+  const v = (value || "").trim();
+  if (!v) return { url: "", handle: "" };
+  const safe = safeHttpUrl(v);
+  if (safe) {
+    const m = safe.match(/^https?:\/\/(?:www\.|mobile\.)?(?:x|twitter)\.com\/([\w]+)/i);
+    return { url: safe, handle: m ? "@" + m[1] : "" };
+  }
+  const id = v.replace(/^@/, "");
+  if (/^\w{1,30}$/.test(id)) return { url: "https://x.com/" + id, handle: "@" + id };
+  return { url: "", handle: "" };
+}
+
+function renderPerformers(rows) {
+  const section = document.getElementById("performers");
+  const list = document.getElementById("performer-list");
+  if (!list) return;
+  list.innerHTML = "";
+  const items = (rows || []).filter((row) => row.name);
+  if (items.length === 0) { if (section) section.hidden = true; return; }
+  if (section) section.hidden = false;
+
+  items.forEach((row) => {
+    const x = normalizeXUrl(row.x_url);
+    const li = document.createElement("li");
+    li.className = "performer-card";
+    li.innerHTML = `
+      <span class="performer-name">${escapeHtml(row.name)}</span>
+      ${x.url ? `<a class="ambassador-link performer-x" href="${escapeAttr(x.url)}" target="_blank" rel="noopener" aria-label="${escapeAttr(row.name)} のX">${escapeHtml(x.handle ? "X " + x.handle : "X")}<span aria-hidden="true">↗</span></a>` : ""}`;
+    list.appendChild(li);
+  });
 }
