@@ -542,8 +542,17 @@ function renderPerformers(rows) {
     const x = normalizeXUrl(row.x_url);
     const li = document.createElement("li");
     li.className = "performer-card";
+    const speakers = [1, 2, 3].map((n) => {
+      const nm = (row["speaker" + n] || "").trim();
+      if (!nm) return "";
+      const sx = normalizeXUrl(row["speaker" + n + "_x"]);
+      return sx.url
+        ? `<li><a href="${escapeAttr(sx.url)}" target="_blank" rel="noopener">${escapeHtml(nm)}</a></li>`
+        : `<li>${escapeHtml(nm)}</li>`;
+    }).join("");
     li.innerHTML = `
       <span class="performer-name">${escapeHtml(row.name)}</span>
+      ${speakers ? `<ul class="performer-speakers" aria-label="登壇者">${speakers}</ul>` : ""}
       ${x.url ? `<a class="ambassador-link performer-x" href="${escapeAttr(x.url)}" target="_blank" rel="noopener" aria-label="${escapeAttr(row.name)} のX">${escapeHtml(x.handle ? "X " + x.handle : "X")}<span aria-hidden="true">↗</span></a>` : ""}`;
     list.appendChild(li);
   });

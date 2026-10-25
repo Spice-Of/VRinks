@@ -33,7 +33,7 @@ const SITE_CONFIG = {
     supporters: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=359879489&single=true&output=csv", // 応援団体シートのCSV公開URL
     ambassadors: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=323996253&single=true&output=csv",
     gallery:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1985497496&single=true&output=csv", // 過去の様子(一番下のギャラリー)シートのCSV公開URL
-    performers: "", // （performersシートのCSV公開URL）
+    performers: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1581623935&single=true&output=csv", // （performersシートのCSV公開URL）
   },
 
   /* ---------------------------------------------------------

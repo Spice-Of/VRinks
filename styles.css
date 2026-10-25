@@ -746,6 +746,19 @@ a:focus-visible, button:focus-visible {
   color: var(--color-ink);
   overflow-wrap: anywhere;
 }
+.performer-speakers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.88rem;
+  color: var(--color-ink-soft);
+}
+.performer-speakers li::before { content: "– "; color: var(--color-gold-mid); }
+.performer-speakers a { color: inherit; text-decoration: underline; text-decoration-color: var(--color-gold-mid); text-underline-offset: 3px; }
+.performer-speakers a:hover { color: var(--color-gold); }
 .performer-x { max-width: 100%; overflow-wrap: anywhere; }
 @media (max-width: 860px) { .performer-list { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .performer-list { grid-template-columns: 1fr; } }
