@@ -550,10 +550,15 @@ function renderPerformers(rows) {
         ? `<li><a href="${escapeAttr(sx.url)}" target="_blank" rel="noopener">${escapeHtml(nm)}</a></li>`
         : `<li>${escapeHtml(nm)}</li>`;
     }).join("");
+    const img = (row.image_url || "").trim();
     li.innerHTML = `
+      ${img ? `<button type="button" class="performer-image" aria-label="${escapeAttr(row.name)} の画像を拡大"><img src="${escapeAttr(img)}" alt="${escapeAttr(row.name)}" loading="lazy"></button>` : ""}
       <span class="performer-name">${escapeHtml(row.name)}</span>
       ${speakers ? `<ul class="performer-speakers" aria-label="登壇者">${speakers}</ul>` : ""}
       ${x.url ? `<a class="ambassador-link performer-x" href="${escapeAttr(x.url)}" target="_blank" rel="noopener" aria-label="${escapeAttr(row.name)} のX">${escapeHtml(x.handle ? "X " + x.handle : "X")}<span aria-hidden="true">↗</span></a>` : ""}`;
+    const btn = li.querySelector(".performer-image");
+    if (btn) btn.addEventListener("click", () => openLightbox(img));
     list.appendChild(li);
   });
+  list.classList.toggle("has-images", items.some((row) => (row.image_url || "").trim()));
 }
