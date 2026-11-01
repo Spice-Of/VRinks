@@ -34,6 +34,8 @@ const SITE_CONFIG = {
     ambassadors: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=323996253&single=true&output=csv",
     gallery:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1985497496&single=true&output=csv", // 過去の様子(一番下のギャラリー)シートのCSV公開URL
     performers: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1581623935&single=true&output=csv", // （performersシートのCSV公開URL）
+    commentators: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTHHdMeUs2rz-M8O547RDUbWaqyMJ5YLzKgNWRWNPX5R7gDWBBSsK6PS-4b6k-KyCUZIYFaj9PuVkE6/pub?gid=1702910236&single=true&output=csv",
+
   },
 
   /* ---------------------------------------------------------
