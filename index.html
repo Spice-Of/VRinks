@@ -38,6 +38,7 @@
     <a href="#about">概要</a>
     <a href="#lineup">タイムスケジュール</a>
     <a href="#performers">登壇団体</a>
+    <a href="#commentators">コメンテーター</a>
     <a href="#ambassadors">アンバサダー</a>
     <a href="#gallery">過去の様子</a>
   </nav>
@@ -101,6 +102,7 @@
       <div class="youtube-block" id="youtube-block" hidden>
         <h3 class="youtube-title">公式YouTubeチャンネル</h3>
         <div class="youtube-frame" id="youtube-frame"></div>
+        <a class="news-link youtube-open" id="youtube-open-link" href="#" target="_blank" rel="noopener" hidden>YouTubeで見る<span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
@@ -134,11 +136,22 @@
     </div>
   </section>
 
-  <!-- ============ AMBASSADORS（アンバサダー） ============ -->
-  <section class="section" id="ambassadors">
+  <!-- ============ COMMENTATORS（各会場のコメンテーター） ============ -->
+  <section class="section" id="commentators" hidden>
     <div class="section-inner">
       <div class="section-head">
         <span class="section-mark" aria-hidden="true">05</span>
+        <h2>コメンテーター</h2>
+      </div>
+      <ul class="performer-list" id="commentator-list"></ul>
+    </div>
+  </section>
+
+  <!-- ============ AMBASSADORS（アンバサダー） ============ -->
+  <section class="section alt" id="ambassadors">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-mark" aria-hidden="true">06</span>
         <h2 id="ambassadors-title">アンバサダー</h2>
       </div>
       <div class="ambassador-list" id="ambassador-list">
@@ -162,10 +175,10 @@
   </section>
 
   <!-- ============ GALLERY（過去の様子） ============ -->
-  <section class="section alt" id="gallery">
+  <section class="section" id="gallery">
     <div class="section-inner">
       <div class="section-head">
-        <span class="section-mark" aria-hidden="true">06</span>
+        <span class="section-mark" aria-hidden="true">07</span>
         <h2 id="gallery-title">過去の様子</h2>
       </div>
       <div class="gallery-grid" id="gallery-grid">
@@ -187,6 +200,7 @@
     <nav class="footer-links" aria-label="外部リンク">
       <a href="#" id="footer-x-link" target="_blank" rel="noopener">X (Twitter)</a>
       <a href="#" id="footer-group-link" target="_blank" rel="noopener">グループ</a>
+      <a href="#" id="footer-youtube-link" target="_blank" rel="noopener" hidden>YouTube</a>
     </nav>
     <p class="footer-copy">© <span id="footer-year"></span> Spice Of VRinks</p>
   </div>

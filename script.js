@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadNews();
   loadSupporters();
   loadPerformers();
+  loadCommentators();
   loadAmbassadors();
   loadGallery();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
@@ -26,6 +27,12 @@ function applyLinks() {
 
   const xLink = document.getElementById("footer-x-link");
   if (xLink) xLink.href = SITE_CONFIG.xUrl;
+
+  const ytUrl = safeHttpUrl((SITE_CONFIG.youtubeLinkUrl || "").trim());
+  const ytFooter = document.getElementById("footer-youtube-link");
+  if (ytFooter && ytUrl) { ytFooter.href = ytUrl; ytFooter.hidden = false; }
+  const ytOpen = document.getElementById("youtube-open-link");
+  if (ytOpen && ytUrl) { ytOpen.href = ytUrl; ytOpen.hidden = false; }
 
   const groupLink = document.getElementById("footer-group-link");
   if (groupLink) groupLink.href = SITE_CONFIG.groupJoinUrl;
@@ -561,4 +568,44 @@ function renderPerformers(rows) {
     list.appendChild(li);
   });
   list.classList.toggle("has-images", items.some((row) => (row.image_url || "").trim()));
+}
+
+
+/* ---------------- 各会場のコメンテーター ---------------- */
+function loadCommentators() {
+  loadCsv(
+    SITE_CONFIG.csv.commentators,
+    (rows) => renderCommentators(rows),
+    () => renderCommentators(typeof FALLBACK_COMMENTATORS !== "undefined" ? FALLBACK_COMMENTATORS : [])
+  );
+}
+
+// 会場はまだ公開しないため、並べて表示するだけ(venue列があっても表示しません)
+function renderCommentators(rows) {
+  const section = document.getElementById("commentators");
+  const list = document.getElementById("commentator-list");
+  if (!list) return;
+  list.innerHTML = "";
+  const people = (rows || []).filter((row) => row.name);
+  if (people.length === 0) { if (section) section.hidden = true; return; }
+  if (section) section.hidden = false;
+
+  people.forEach((row) => {
+    const x = normalizeXUrl(row.x_url);
+    const yt = safeHttpUrl((row.youtube_url || "").trim());
+    const img = (row.image_url || "").trim();
+    const li = document.createElement("li");
+    li.className = "performer-card";
+    li.innerHTML = `
+      ${img ? `<button type="button" class="performer-image" aria-label="${escapeAttr(row.name)} の画像を拡大"><img src="${escapeAttr(img)}" alt="${escapeAttr(row.name)}" loading="lazy"></button>` : ""}
+      <span class="performer-name">${escapeHtml(row.name)}</span>
+      ${x.url || yt ? `<span class="commentator-links">
+        ${x.url ? `<a class="ambassador-link" href="${escapeAttr(x.url)}" target="_blank" rel="noopener" aria-label="${escapeAttr(row.name)} のX">${escapeHtml(x.handle ? "X " + x.handle : "X")}<span aria-hidden="true">↗</span></a>` : ""}
+        ${yt ? `<a class="ambassador-link" href="${escapeAttr(yt)}" target="_blank" rel="noopener" aria-label="${escapeAttr(row.name)} のYouTube">YouTube<span aria-hidden="true">↗</span></a>` : ""}
+      </span>` : ""}`;
+    const btn = li.querySelector(".performer-image");
+    if (btn) btn.addEventListener("click", () => openLightbox(img));
+    list.appendChild(li);
+  });
+  list.classList.toggle("has-images", people.some((row) => (row.image_url || "").trim()));
 }

@@ -349,6 +349,7 @@ img { max-width: 100%; display: block; }
   color: var(--color-gold);
   letter-spacing: 0.08em;
 }
+.youtube-open { margin-top: 14px; }
 .youtube-frame {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -789,6 +790,8 @@ a:focus-visible, button:focus-visible {
   .performer-list.has-images { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .performer-card:has(.performer-image) > :not(.performer-image) { margin: 0 12px; }
 }
+
+.commentator-links { display: inline-flex; flex-wrap: wrap; gap: 6px; }
 
 .ambassador-list {
   --amb-gap: 20px;
