@@ -721,6 +721,48 @@ a:focus-visible, button:focus-visible {
 /* ---------------- Ambassadors (アンバサダー) ---------------- */
 [hidden] { display: none !important; }
 
+.schedule-images { margin-top: 64px; }
+.schedule-images-title {
+  margin: 0 0 20px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+}
+.schedule-image-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.schedule-image-item { min-width: 0; }
+.schedule-image-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--color-line-soft);
+  background: var(--color-card);
+  overflow: hidden;
+  cursor: zoom-in;
+  font: inherit;
+}
+.schedule-image-btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+.schedule-image-btn:hover img { transform: scale(1.02); opacity: 0.92; }
+.schedule-image-caption { margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.schedule-image-venue { font-family: var(--font-display); font-weight: 600; color: var(--color-ink); }
+.schedule-image-meta { font-size: 0.8rem; color: var(--color-ink-soft); }
+@media (max-width: 860px) { .schedule-image-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .schedule-image-grid { grid-template-columns: 1fr; } }
+
 .performer-list {
   list-style: none;
   margin: 36px 0 0;

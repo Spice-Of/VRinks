@@ -193,6 +193,35 @@ function renderScheduleDetail(rows) {
     `;
     container.appendChild(dayEl);
   });
+
+  renderScheduleImages(rows);
+}
+
+// schedule シートの image_url 列に画像を入れた会場だけ、会場ごとのスケジュール画像として並べる
+function renderScheduleImages(rows) {
+  const block = document.getElementById("schedule-images");
+  const grid = document.getElementById("schedule-image-grid");
+  if (!block || !grid) return;
+  grid.innerHTML = "";
+  const items = (rows || []).filter((row) => (row.image_url || "").trim());
+  if (items.length === 0) { block.hidden = true; return; }
+  block.hidden = false;
+
+  items.forEach((row) => {
+    const url = row.image_url.trim();
+    const venue = (row.venue || "").trim();
+    const meta = [row.date, row.start_time && row.end_time ? `${row.start_time}–${row.end_time}` : row.start_time]
+      .filter(Boolean).join(" ");
+    const li = document.createElement("li");
+    li.className = "schedule-image-item";
+    li.innerHTML = `
+      <button type="button" class="schedule-image-btn" aria-label="${escapeAttr(venue || "スケジュール")} の画像を拡大">
+        <img src="${escapeAttr(url)}" alt="${escapeAttr(venue ? venue + " のタイムスケジュール" : "タイムスケジュール")}" loading="lazy">
+      </button>
+      <p class="schedule-image-caption"><span class="schedule-image-venue">${escapeHtml(venue)}</span>${meta ? `<span class="schedule-image-meta">${escapeHtml(meta)}</span>` : ""}</p>`;
+    li.querySelector("button").addEventListener("click", () => openLightbox(url));
+    grid.appendChild(li);
+  });
 }
 
 /* ---------------- 最新情報（テキスト or Xポスト埋め込み） ---------------- */
