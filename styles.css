@@ -420,6 +420,25 @@ img { max-width: 100%; display: block; }
   margin-left: 6px;
 }
 
+.schedule-day-image {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 0;
+  border: 1px solid var(--color-line-soft);
+  background: var(--color-card);
+  overflow: hidden;
+  cursor: zoom-in;
+  font: inherit;
+}
+.schedule-day-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 300ms ease;
+}
+.schedule-day-image:hover img { opacity: 0.92; }
+
 .schedule-slots {
   list-style: none;
   margin: 0;

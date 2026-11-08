@@ -173,6 +173,8 @@ function renderScheduleDetail(rows) {
     const dayEl = document.createElement("div");
     dayEl.className = "schedule-day-block";
 
+    // その日の行のうち、最初に day_image_url が入っているものを日付ごとの画像として使う
+    const dayImg = ((day.rows.find((r) => (r.day_image_url || "").trim()) || {}).day_image_url || "").trim();
     const slotsHtml = day.rows
       .map((row) => {
         const timeRange =
@@ -190,7 +192,10 @@ function renderScheduleDetail(rows) {
     dayEl.innerHTML = `
       <h3 class="schedule-day-heading">${escapeHtml(day.date)}${day.weekday ? `<span class="schedule-day-weekday">(${escapeHtml(day.weekday)})</span>` : ""}</h3>
       <ul class="schedule-slots">${slotsHtml}</ul>
+      ${dayImg ? `<button type="button" class="schedule-day-image" aria-label="${escapeAttr(day.date)} のスケジュール画像を拡大"><img src="${escapeAttr(dayImg)}" alt="${escapeAttr(day.date)} のタイムスケジュール" loading="lazy"></button>` : ""}
     `;
+    const dayBtn = dayEl.querySelector(".schedule-day-image");
+    if (dayBtn) dayBtn.addEventListener("click", () => openLightbox(dayImg));
     container.appendChild(dayEl);
   });
 
