@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadPerformers();
   loadCommentators();
   loadAmbassadors();
+  loadCheering();
   loadGallery();
   document.getElementById("footer-year").textContent = new Date().getFullYear();
 });
@@ -642,4 +643,43 @@ function renderCommentators(rows) {
     list.appendChild(li);
   });
   list.classList.toggle("has-images", people.some((row) => (row.image_url || "").trim()));
+}
+
+
+/* ---------------- 応援団体（バナー＋リンク） ---------------- */
+function loadCheering() {
+  loadCsv(
+    SITE_CONFIG.csv.cheering,
+    (rows) => renderCheering(rows),
+    () => renderCheering(typeof FALLBACK_CHEERING !== "undefined" ? FALLBACK_CHEERING : [])
+  );
+}
+
+function renderCheering(rows) {
+  const section = document.getElementById("cheering");
+  const grid = document.getElementById("cheering-grid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  const items = (rows || []).filter((row) => row.name || row.banner_url);
+  if (items.length === 0) { if (section) section.hidden = true; return; }
+  if (section) section.hidden = false;
+
+  items.forEach((row) => {
+    const link = safeHttpUrl((row.link_url || "").trim());
+    const banner = document.createElement(link ? "a" : "div");
+    if (link) {
+      banner.href = link;
+      banner.target = "_blank";
+      banner.rel = "noopener";
+    }
+    const img = (row.banner_url || "").trim();
+    if (img) {
+      banner.className = "ad-banner";
+      banner.innerHTML = `<img src="${escapeAttr(img)}" alt="${escapeAttr(row.name || "")}" loading="lazy">`;
+    } else {
+      banner.className = "ad-banner text-only";
+      banner.textContent = row.name || "";
+    }
+    grid.appendChild(banner);
+  });
 }
