@@ -596,6 +596,11 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   aspect-ratio: 16 / 9;
   padding: 12px;
+  background: #fff;
+  border-color: #fff;
+}
+.cheering-grid .ad-banner.text-only {
+  color: #1a2040;
 }
 .cheering-grid .ad-banner img {
   width: 100%;
