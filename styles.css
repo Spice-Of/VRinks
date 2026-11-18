@@ -544,7 +544,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------------- Ad slot (Supportersからランダムに1件) ---------------- */
 .ad-slot {
-  padding: 40px 0 0;
+  padding: 72px 0 0;
 }
 
 .ad-slot-inner {
@@ -561,6 +561,14 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 560px) {
   .ad-grid { grid-template-columns: 1fr; }
+}
+
+/* 広告枠(Supporters): 応援団体と区別がつくよう、1列で大きく縦に並べる */
+.ad-slot .ad-grid {
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 840px;
+  margin: 0 auto;
 }
 
 .ad-banner {
